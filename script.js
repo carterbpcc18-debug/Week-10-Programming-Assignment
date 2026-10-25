@@ -14,18 +14,57 @@ class Pet {
     }
 }
 
-const pet1 = new Pet("Sparky", "Dragon");
-const pet2 = new Pet("Luna", "Cat");
+const petContainer = document.getElementById("petContainer");
+const petNameInput = document.getElementById("petName");
+const addPetButton = document.getElementById("addPetButton");
 
-console.log(pet1.describe());
-console.log(pet2.describe());
+function displayPet(pet) {
+    const petCard = document.createElement("div");
+    petCard.className = "pet-card";
 
-const hungerDisplay = document.getElementById("hunger");
-const feedButton = document.getElementById("feedButton");
+    const petDescription = document.createElement("h3");
+    petDescription.textContent = pet.describe();
 
-hungerDisplay.textContent = pet1.hunger;
+    const hungerLabel = document.createElement("p");
+    hungerLabel.textContent = "Hunger: ";
 
-feedButton.addEventListener("click", () => {
-    pet1.feed();
-    hungerDisplay.textContent = pet1.hunger;
-});
+    const hungerDisplay = document.createElement("span");
+    hungerDisplay.textContent = pet.hunger;
+
+    hungerLabel.appendChild(hungerDisplay);
+
+    const feedButton = document.createElement("button");
+    feedButton.textContent = "Feed Pet";
+
+    feedButton.addEventListener("click", () => {
+        pet.feed();
+        hungerDisplay.textContent = pet.hunger;
+    });
+
+    petCard.appendChild(petDescription);
+    petCard.appendChild(hungerLabel);
+    petCard.appendChild(feedButton);
+
+    petContainer.appendChild(petCard);
+}
+
+function addPet() {
+    const name = petNameInput.value.trim();
+
+    if (name === "") {
+        alert("Please enter a pet name.");
+        return;
+    }
+
+    const newPet = new Pet(name, "Pet");
+    displayPet(newPet);
+
+    petNameInput.value = "";
+    petNameInput.focus();
+}
+
+addPetButton.addEventListener("click", addPet);
+
+// Add two example pets when the page loads.
+displayPet(new Pet("Sparky", "Dragon"));
+displayPet(new Pet("Luna", "Cat"));
