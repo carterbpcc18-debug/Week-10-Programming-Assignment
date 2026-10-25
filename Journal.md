@@ -25,3 +25,13 @@ In this phase, I added a hunger property to the Pet class and created a feed() m
 **How did your mental model change when moving from one pet to a dynamic list of pets? How does using a class help manage multiple pets?**
 
 In this phase, I created an input field and an Add Pet button so users can add pets dynamically. Each pet gets its own card with a hunger display and Feed Pet button. I learned that each instance of the Pet class keeps its own information, so feeding one pet does not affect the others. Using a class makes it easier to create and manage multiple pets because they all share the same properties and methods while keeping their individual states.
+
+
+
+# Phase 4: Validation & Reflection
+
+### Journal Prompt
+
+**What bugs or unexpected behavior did you find during testing? What AI suggestion was helpful, and why?**
+
+In this phase, I tested the sanctuary by adding multiple pets and feeding them separately. I updated the feed() method to use Math.max() so hunger cannot drop below zero. This helped prevent an unexpected negative hunger value. An AI suggestion that could improve the project is event delegation, which would let the pet container handle clicks from its Feed Pet buttons instead of creating a separate event listener for each button. This could make event handling easier to maintain as more pets are added. Testing helped me understand the importance of checking edge cases and making sure each pet maintains its own state.
